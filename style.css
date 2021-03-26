@@ -1,0 +1,376 @@
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&family=Montserrat&display=swap'); /* font-family: 'Fascinate', cursive; font-family: 'Montserrat', sans-serif; */
+/* css reset https://piccalil.li/blog/a-modern-css-reset */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+button,
+input[type="submit"] {
+    cursor: pointer;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+html {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* css variables */
+
+:root {
+    --color__primary: rgb(86,155,141);
+    --color__secondary: rgb(42, 56, 42);
+    --color__fonts: rgb(254, 254, 250);
+    --color__accent: rgb(217, 167, 61);
+    --toggle__width: 3rem;
+    --toggle__height: calc(var(--toggle__width) / 1.6);
+    --toggle__radius: calc(var(--toggle__height) / 1.2);
+}
+
+/* colors */
+
+html {
+    background-color: var(--color__primary);
+}
+
+.form__container {
+    background-color: var(--color__secondary);
+}
+
+input[type="submit"] {
+    background-color: var(--color__accent);
+}
+
+/* typography */
+
+* {
+    font-size: 100%;
+    color: var(--color__fonts);
+}
+
+h1, 
+h2,
+h3,
+h4 {
+    font-family: 'Fascinate', cursive;
+}
+
+p,
+a,
+label,
+input,
+span {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-size: 3.195rem;
+}
+
+label,
+p,
+span {
+    font-size: 1.25rem;
+}
+
+h1,
+label {
+    text-align: center;
+}
+
+/* grid */
+
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 85% 1fr;
+}
+
+/* general */
+
+body {
+    padding: .5rem;
+}
+
+header {
+    height: max-content;
+}
+
+header,
+.form__container,
+form,
+label,
+input,
+select {
+    max-width: 100%;
+}
+
+.heart:before {
+    content: "🖤";
+  }
+
+/* flex */
+
+form {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+}
+
+#weatherDisplay {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.weather__info {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    width: 90%;
+    margin: .35rem auto;
+}
+
+p,
+p span {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* form */
+
+form {
+    height: 100%;
+    width: 100%;
+    padding: .2rem;
+}
+
+.form__container {
+    position: relative;
+}
+
+form,
+.form__container,
+label,
+select,
+input {
+    border-radius: 6px;
+    color: black;
+}
+
+button,
+input[type="submit"],
+input,
+select {
+    outline: none;
+    border: none;
+    border-radius: 6px;
+}
+
+input:not(input[type="submit"]),
+select {
+    width: 15rem;
+    padding: .2rem;
+}
+
+input[type="submit"] {
+    width: 6rem;
+    padding: .2rem;
+}
+
+label {
+    margin: .15rem auto;
+}
+
+p span {
+    margin-left: .5rem;
+}
+
+/* toggle guide from https://dev.to/dcodeyt/creating-a-css-only-toggle-switch-5cg3 */
+
+.toggle {
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+}
+
+.toggle__input {
+    display: none;
+}
+
+.toggle__fill {
+    position: relative;
+    width: var(--toggle__width);
+    height: var(--toggle__height);
+    border-radius: var(--toggle__radius);
+    background: #dddddd;
+    transition: background-color 0.2s;
+}
+
+.toggle__fill::after {
+    content: "°F";
+    color: black;
+    padding: .36rem;
+    font-size: .9rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--toggle__height);
+    width: var(--toggle__width);
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    border-radius: var(--toggle__radius);
+    transition: transform 0.2s;
+}
+
+.toggle__input:checked ~ .toggle__fill {
+    background-color: #009578;
+}
+
+.toggle__input:checked ~ .toggle__fill::after {
+    transform: translateX(var(--toggle__height));
+    content: "";
+} 
+
+/* main weather display */
+
+.weather__info span {
+    background-color: var(--color__accent);
+    border-radius: 6px;
+    padding: .2rem;
+}
+
+
+/* svgs */
+
+.svg__container {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+}
+
+.toggle__fill .svg__container {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: .15rem;
+    margin-right: .7rem;
+}
+
+footer .svg__container {
+    margin-left: .5rem;
+}
+
+/* media queries */
+
+@media screen and (min-width: 1300px) { 
+    html {
+        font-size: 125%;
+    }
+
+    h1 {
+        font-size: 4.5rem;
+    }
+
+    body {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 65% 1fr;
+        grid-template-areas: 
+            "header form"
+            "weather form"
+            "footer footer";
+        grid-gap: .25rem;
+    }
+
+    header {
+        grid-area: header;
+    }
+
+    .form__container {
+        grid-area: form;
+    }
+
+    main {
+        grid-area: weather;
+    }
+
+    footer {
+        grid-area: footer;
+    }
+
+    input, 
+    select {
+        max-width: 100%;
+    }
+}
